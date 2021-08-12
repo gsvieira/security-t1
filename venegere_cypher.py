@@ -1,5 +1,5 @@
 import string
-characters = list(string.ascii_lowercase) + list(string.digits) + [" "]
+characters = list(string.ascii_lowercase) #+ list(string.digits) + [" "]
 
 map_int_to_char = {}
 map_char_to_int = {}
@@ -14,6 +14,7 @@ last_char_position = len(map_int_to_char)-1
 
 def cipher(message, key):
   message = message.replace("\n", " ").lower()
+  message = message.replace(" ", "")
   cipher_message = []
   key_index = 0
   list_key = list(key.strip(" "))
@@ -58,8 +59,11 @@ file = open("input.txt","r")
 message = file.read()
 file.close()
 
-print(cipher(message, "chave"))
+message_ciphered = cipher(message, "chave")
 
+f = open("output.txt","w")
+f.write(message_ciphered)
+f.close()
 
 """ i = cipher("a banana disse ola para o joao", "chave")
 print(i)
