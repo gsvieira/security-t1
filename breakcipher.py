@@ -1,12 +1,34 @@
-
-
-#Usa Ic pra determinar o tamanho da chave
+import collections
+import string
+#Usa IC pra determinar o tamanho da chave
 possible_keys = []
-sublists = [0,0]
-def get_key_lenght(ciphertext):
+def get_key_length(ciphertext):
+  #divide a messagem em cosets de tamanho 2 a 20 para calculo de IC
   for i in range(2, 21):
-    chipher_list = list(ciphertext)
-    for j in range (1, i+1):
-      sublists [j]= chipher_list.pop(1)
+    cipher_list = list(ciphertext)
+    sublists = []
+    IC_avg = 0.0
+    #gera matrix de coset com tamanho entre 2 e 20
+    for _ in range(i):
+      sublists.append([])
+    #separa a string nos cosets removendo o primeiro elemento da lista e adicionando ao sublist
+    for elem in cipher_list:
+      for j in range(i):
+        if cipher_list!=[]:
+          char= cipher_list.pop(0)
+          (sublists[j]).append(char)
+    #calcula o IC
+    for k in range(i):
+      N = len(sublists[k])
+      freq = collections.Counter(sublists[k])
+      freq_sum = 0.0
+      for elem in string.ascii_lowercase:
+        freq_sum += freq[elem] * (freq[elem]-1)
+      IC = freq_sum / (N*(N-1))
+    #faz média entre os ICs das substrings
+    IC_avg +=IC
+    possible_keys.append(i, IC_avg/i)
+  possible_keys.sort(key= lambda x: x[0], reverse = True)
+  return possible_keys #retorna tamanho da chave com maior chance de ser a certa com o IC correspondente
 
-"""use list pop to split the message into multiple substrings"""
+
