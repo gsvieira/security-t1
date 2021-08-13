@@ -1,4 +1,4 @@
-import string
+import string, re
 characters = list(string.ascii_lowercase) #+ list(string.digits) + [" "]
 
 map_int_to_char = {}
@@ -13,8 +13,8 @@ for char in characters:
 last_char_position = len(map_int_to_char)-1
 
 def cipher(message, key):
-  message = message.replace("\n", " ").lower()
-  message = message.replace(" ", "")
+  #message = message.replace("\n", " ").lower()
+  message = re.sub(r'[.,"\'-?:!;\n ]','', message).lower()
   cipher_message = []
   key_index = 0
   list_key = list(key.strip(" "))
@@ -35,7 +35,7 @@ def cipher(message, key):
   return "".join(cipher_message)
 
 def decipher(message, key):
-  message = message.replace("\n", " ").lower()
+  message = re.sub(r'[.,"\'-?:!;\n ]','', message).lower()
   deciphered_message = []
   key_index = 0
   list_key = list(key.strip(" "))
@@ -61,8 +61,14 @@ file.close()
 
 message_ciphered = cipher(message, "chave")
 
-f = open("output.txt","w")
+f = open("ciphered.txt","w")
 f.write(message_ciphered)
+f.close()
+
+message_deciphered = decipher(message_ciphered, "chave")
+
+f = open("deciphered.txt","w")
+f.write(message_deciphered)
 f.close()
 
 """ i = cipher("a banana disse ola para o joao", "chave")
