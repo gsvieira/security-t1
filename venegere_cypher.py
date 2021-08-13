@@ -14,7 +14,7 @@ last_char_position = len(map_int_to_char)-1
 
 def cipher(message, key):
   #message = message.replace("\n", " ").lower()
-  message = re.sub(r'[.,"\'-?:!;\n ]','', message).lower()
+  message = re.sub("[^a-zA-Z]+","", message).lower()
   cipher_message = []
   key_index = 0
   list_key = list(key.strip(" "))
@@ -35,7 +35,7 @@ def cipher(message, key):
   return "".join(cipher_message)
 
 def decipher(message, key):
-  message = re.sub(r'[.,"\'-?:!;\n ]','', message).lower()
+  message = re.sub("[^a-zA-Z]+","", message).lower()
   deciphered_message = []
   key_index = 0
   list_key = list(key.strip(" "))
@@ -59,13 +59,13 @@ file = open("input.txt","r")
 message = file.read()
 file.close()
 
-message_ciphered = cipher(message, "meubarquinho")
+message_ciphered = cipher(message, "abcd")
 
 f = open("ciphered.txt","w")
 f.write(message_ciphered)
 f.close()
 
-message_deciphered = decipher(message_ciphered, "meubarquinho")
+message_deciphered = decipher(message_ciphered, "abcd")
 
 f = open("deciphered.txt","w")
 f.write(message_deciphered)
