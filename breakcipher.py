@@ -3,8 +3,8 @@ import string
 #Usa IC pra determinar o tamanho da chave
 possible_keys = []
 def get_key_length(ciphertext):
-  #divide a messagem em cosets de tamanho 2 a 20 para calculo de IC
-  for i in range(2,8):
+  #divide a messagem em cosets de tamanho 2 a 20 para calculo de IC Bug chave = 8
+  for i in range(2,21):
     cipher_list = list(ciphertext)
     cipher_list_size = len(cipher_list)
     sublists = []
@@ -42,7 +42,13 @@ def get_key(message, possible_keys):
   return 0
 
 
+"""f = open("ciphered.txt", "w")
+for letter in ("abc"):
+  for _ in range(7):
+    f.write(letter)
+f.close"""
 f = open("ciphered.txt", "r")
 message = f.read()
+print(len(message))
 r = get_key_length(message)
 print(r)

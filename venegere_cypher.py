@@ -59,13 +59,13 @@ file = open("input.txt","r")
 message = file.read()
 file.close()
 
-message_ciphered = cipher(message, "chave")
+message_ciphered = cipher(message, "meubarquinho")
 
 f = open("ciphered.txt","w")
 f.write(message_ciphered)
 f.close()
 
-message_deciphered = decipher(message_ciphered, "chave")
+message_deciphered = decipher(message_ciphered, "meubarquinho")
 
 f = open("deciphered.txt","w")
 f.write(message_deciphered)
