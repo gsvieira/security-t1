@@ -17,6 +17,8 @@ def get_key_length(ciphertext):
         if cipher_list!=[]:
           char= cipher_list.pop(0)
           (sublists[j]).append(char)
+    for p in range(i):
+      print(sublists[p])
     #calcula o IC
     for k in range(i):
       N = len(sublists[k])
@@ -27,8 +29,16 @@ def get_key_length(ciphertext):
       IC = freq_sum / (N*(N-1))
     #faz média entre os ICs das substrings
     IC_avg +=IC
-    possible_keys.append(i, IC_avg/i)
-  possible_keys.sort(key= lambda x: x[0], reverse = True)
+    possible_keys.append((i, IC_avg/i))
+  possible_keys.sort(key= lambda x: x[1], reverse = True)
   return possible_keys #retorna tamanho da chave com maior chance de ser a certa com o IC correspondente
 
+def get_key(message, possible_keys):
 
+  return 0
+
+
+f = open("output.txt", "r")
+message = f.read()
+r = get_key_length(message)
+print(r)
