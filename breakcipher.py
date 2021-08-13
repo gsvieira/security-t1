@@ -1,4 +1,6 @@
 import collections, string, re
+
+
 #Usa IC pra determinar o tamanho da chave
 possible_keys = []
 def get_key_length(ciphertext):
@@ -11,7 +13,8 @@ def get_key_length(ciphertext):
     cipher_list_size = len(cipher_list)
     sublists = []
     IC_list = [] #testar media de IC
-    IC_sum = 0.0
+    IC_sum, IC = 0.0, 0.0
+    print(IC)
     #gera matrix de coset com tamanho entre 2 e 10
     for _ in range(i):
       sublists.append([])
@@ -30,7 +33,10 @@ def get_key_length(ciphertext):
       freq_sum = 0.0
       for elem in string.ascii_lowercase:
         freq_sum += freq[elem] * (freq[elem]-1)
-      IC = freq_sum / (N*(N-1))
+      if N==0:
+        IC = 0
+      else:
+        IC = freq_sum / (N*(N-1))
       IC_list[k].append((i, IC))
       IC_sum +=IC
     print(IC_list)
