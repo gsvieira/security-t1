@@ -41,7 +41,7 @@ def get_key_length(ciphertext):
       IC_sum +=IC
     #print(IC_list)
     #faz média entre os ICs das substrings
-    possible_keys.append((i, IC_sum/i))#acrecentar '/i'
+    possible_keys.append((i, IC_sum/i))
   possible_keys.sort(key= lambda x: x[1], reverse = True)
   return possible_keys #retorna tamanho da chave com maior chance de ser a certa com o IC correspondente
 
@@ -54,6 +54,7 @@ def get_key(ciphertext, key_lenght=0):
   alphabet_size = len(string.ascii_lowercase)
   cipher_list = list(ciphertext_treated)
   cipher_list_size = len(cipher_list)
+  #frequencia das letras em ingles e portugues
   english_letter_frequency = [0.08167, 0.01492, 0.02782, 0.04253, 0.12702, 0.02228, 0.02015, 0.06094, 0.06966, 0.00153, 0.00772, 0.04025, 0.02406, 0.06749, 0.07507, 0.01929, 0.00095, 0.05987, 0.06327, 0.09056, 0.02758, 0.00978, 0.02360, 0.0015, 0.01974, 0.00074]
 
   portuguese_letter_frequency = [0.1463, 0.0104, 0.0388, 0.0499, 0.1257, 0.0102, 0.013, 0.0128, 0.0618, 0.004, 0.0002, 0.0278, 0.0474, 0.0505, 0.1073, 0.0252, 0.012, 0.0653, 0.0781, 0.0434, 0.0463, 0.0167, 0.0001, 0.0021, 0.0001, 0.0047]
@@ -87,7 +88,7 @@ def get_key(ciphertext, key_lenght=0):
         except ValueError:
           count_list.append((letter, 0))
       count_list.sort(key= lambda x: x[0])
-      
+      #calculo de Chi²
       f_sum_eng = 0.0
       f_sum_pt = 0.0
       #print(len(count_list))

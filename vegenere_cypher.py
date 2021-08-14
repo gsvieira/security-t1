@@ -59,19 +59,14 @@ file = open("input.txt","r")
 message = file.read()
 file.close()
 
-message_ciphered = cipher(message, "abcd")
+message_ciphered = cipher(message, "abcde")
 
 f = open("ciphered.txt","w")
 f.write(message_ciphered)
 f.close()
 
-message_deciphered = decipher(message_ciphered, "abcd")
+message_deciphered = decipher(message_ciphered, "abcde")
 
 f = open("deciphered.txt","w")
 f.write(message_deciphered)
 f.close()
-
-""" i = cipher("a banana disse ola para o joao", "chave")
-print(i)
-j = decipher(i,"chave")
-print(j) """
