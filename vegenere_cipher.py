@@ -1,4 +1,4 @@
-import string, re
+import string, re, sys
 characters = list(string.ascii_lowercase) #+ list(string.digits) + [" "]
 
 map_int_to_char = {}
@@ -55,17 +55,22 @@ def decipher(message, key):
     key_index+=1
   return "".join(deciphered_message)
 
+
+#inicio do codigo
+if len(sys.argv)<=1:
+  print("É necessario o nome do arquivo que deseja abrir -> breakcipher.py nomedoarquivo.txt")
+  sys.exit()
 file = open("input.txt","r")
 message = file.read()
 file.close()
 
-message_ciphered = cipher(message, "abcde")
+message_ciphered = cipher(message, sys.argv[1])
 
 f = open("ciphered.txt","w")
 f.write(message_ciphered)
 f.close()
 
-message_deciphered = decipher(message_ciphered, "abcde")
+message_deciphered = decipher(message_ciphered, sys.argv[1])
 
 f = open("deciphered.txt","w")
 f.write(message_deciphered)
